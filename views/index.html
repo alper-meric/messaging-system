@@ -1,0 +1,107 @@
+<html>
+    <head>
+        <title>Messaging System</title>
+        <style>
+            body { 
+                font-family: Arial, sans-serif; 
+                line-height: 1.6; 
+                margin: 0;
+                padding: 20px;
+                max-width: 800px;
+                margin: 0 auto;
+                background-color: #f9f9f9;
+            }
+            h1 { 
+                color: #333;
+                border-bottom: 2px solid #4CAF50;
+                padding-bottom: 10px;
+            }
+            .container {
+                background-color: white;
+                padding: 20px;
+                border-radius: 8px;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+            .btn { 
+                display: inline-block;
+                margin: 10px 0;
+                padding: 10px 20px;
+                background: #4CAF50;
+                color: white;
+                text-decoration: none;
+                border-radius: 4px;
+                border: none;
+                cursor: pointer;
+                transition: background 0.3s;
+            }
+            .btn:hover { 
+                background: #45a049; 
+            }
+            .status {
+                margin-top: 20px;
+                padding: 15px;
+                border-radius: 4px;
+                background-color: #f1f1f1;
+            }
+            .footer {
+                margin-top: 30px;
+                font-size: 0.9em;
+                color: #666;
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Messaging System</h1>
+            <p>Automatic message sending and tracking system is running with Fiber framework.</p>
+            
+            <div>
+                <a href="/swagger/index.html" class="btn">API Documentation</a>
+                <a href="/api/messages" class="btn">View Messages</a>
+            </div>
+            
+            <div class="status">
+                <h3>Service Status</h3>
+                <p>Control the message sending service:</p>
+                <button class="btn" onclick="controlService('start')">Start Service</button>
+                <button class="btn" onclick="controlService('stop')">Stop Service</button>
+                <p id="serviceStatus">Loading status...</p>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>Built with Fiber - High performance Go web framework</p>
+        </div>
+        
+        <script>
+            // Simple JavaScript to control the service
+            function controlService(action) {
+                fetch('/api/service?action=' + action, {
+                    method: 'POST'
+                })
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('serviceStatus').innerText = 
+                        data.success ? data.message : 'Error: ' + data.error;
+                })
+                .catch(error => {
+                    document.getElementById('serviceStatus').innerText = 'Error: ' + error;
+                });
+            }
+            
+            // Get initial status
+            fetch('/api/service/status', {
+                method: 'GET'
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('serviceStatus').innerText = 
+                    'Service is ' + (data.running ? 'running' : 'stopped');
+            })
+            .catch(error => {
+                document.getElementById('serviceStatus').innerText = 'Could not get status';
+            });
+        </script>
+    </body>
+</html> 

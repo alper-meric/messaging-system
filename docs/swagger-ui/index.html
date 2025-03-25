@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Messaging System API Documentation</title>
+  <link rel="stylesheet" type="text/css" href="https://unpkg.com/swagger-ui-dist@3/swagger-ui.css">
+  <style>
+    html {
+      box-sizing: border-box;
+      overflow: -moz-scrollbars-vertical;
+      overflow-y: scroll;
+    }
+    
+    *,
+    *:before,
+    *:after {
+      box-sizing: inherit;
+    }
+    
+    body {
+      margin: 0;
+      background: #fafafa;
+    }
+
+    .topbar {
+      padding: 10px 0;
+      background-color: #f8f9fa;
+      border-bottom: 1px solid #e9ecef;
+    }
+
+    .topbar-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+    }
+
+    .topbar-wrapper .link {
+      margin-left: 20px;
+      display: inline-block;
+      padding: 5px 10px;
+      background: #4990e2;
+      color: white;
+      border-radius: 4px;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .topbar-wrapper .link:hover {
+      background: #3672b9;
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="topbar-wrapper">
+      <span>Messaging System API Documentation</span>
+      <div>
+        <a class="link" href="https://validator.swagger.io/validator/debug?url=http://localhost:8080/docs/swagger.yaml" target="_blank">Validate on swagger.io</a>
+        <a class="link" href="https://editor.swagger.io/?url=http://localhost:8080/docs/swagger.yaml" target="_blank">View on swagger.io Editor</a>
+      </div>
+    </div>
+  </div>
+  
+  <div id="swagger-ui"></div>
+
+  <script src="https://unpkg.com/swagger-ui-dist@3/swagger-ui-bundle.js"></script>
+  <script src="https://unpkg.com/swagger-ui-dist@3/swagger-ui-standalone-preset.js"></script>
+  <script>
+    window.onload = function() {
+      // Begin Swagger UI call region
+      const ui = SwaggerUIBundle({
+        url: "/docs/swagger.yaml",
+        dom_id: '#swagger-ui',
+        deepLinking: true,
+        presets: [
+          SwaggerUIBundle.presets.apis,
+          SwaggerUIStandalonePreset
+        ],
+        plugins: [
+          SwaggerUIBundle.plugins.DownloadUrl
+        ],
+        layout: "StandaloneLayout",
+        docExpansion: "list",
+        defaultModelsExpandDepth: 1,
+        defaultModelExpandDepth: 1,
+        showExtensions: true
+      });
+      // End Swagger UI call region
+      window.ui = ui;
+    };
+  </script>
+</body>
+</html> 
